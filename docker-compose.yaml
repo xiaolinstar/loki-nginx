@@ -12,7 +12,6 @@ services:
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
-#      - ./nginx/nginx-stub-status.conf:/etc/nginx/conf.d/nginx-stub-status.conf:ro
       - ./logs:/var/log/nginx # 将 Nginx 容器日志映射到本地磁盘
     ports:
       - "8080:8080"
