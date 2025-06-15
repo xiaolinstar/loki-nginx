@@ -1,0 +1,27 @@
+server:
+  http_listen_port: 9080
+  grpc_listen_port: 0
+
+positions:
+  filename: /tmp/positions.yaml
+
+clients:
+  - url: http://loki-service:3100/loki/api/v1/push
+
+scrape_configs:
+  - job_name: 'loki-nginx-case'
+    # 1. 定义抓取目标
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: loki-nginx-access
+          __path__: /var/log/*.log
+    pipeline_stages:
+      - json:
+          expressions:
+            msec: msec
+            connection: connection
+            connection_requests: connection_requests
+      - labels:
+          mesc: null
